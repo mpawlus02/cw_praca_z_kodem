@@ -1,0 +1,33 @@
+name: GitHub Actions Demo
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  display-python-versions:
+    runs-on: windows-latest
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+      - name: Display Python versions
+        run: |
+          python --version
+          python3 --version
+
+  pylint-test:
+    runs-on: windows-latest
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run Pylint
+        run: pylint app.py
